@@ -1,0 +1,77 @@
+{
+  "models": {
+    "behavior": "models/behavior_best.pt",
+    "pose": "models/yolov8n-pose.pt"
+  },
+  "imgsz": 960,
+  "tracker": "botsort.yaml",
+  "thresholds": {
+    "pose_kpt_conf": 0.5,
+    "person_conf": 0.3,
+    "behavior_conf": 0.35
+  },
+  "decision": {
+    "consecutive_frames": 10,
+    "max_gap_frames": 3,
+    "cooldown_seconds": 30,
+    "hold_red_seconds": 3,
+    "phone_wrist_max_dist_ratio": 0.6,
+    "person_box_min_iou": 0.3
+  },
+  "colors_bgr": {
+    "normal": [
+      0,
+      255,
+      0
+    ],
+    "cheating": [
+      0,
+      0,
+      255
+    ],
+    "object": [
+      255,
+      160,
+      0
+    ]
+  },
+  "paths": {
+    "screenshots_dir": "alerts/screenshots",
+    "sqlite_db": "alerts/alerts.db"
+  },
+  "process_every_n_frames": 2,
+  "firebase": {
+    "enabled": true,
+    "service_account": "firebase/serviceAccountKey.json",
+    "storage_bucket": "YOUR_PROJECT_ID.firebasestorage.app",
+    "collection": "alerts",
+    "upload_screenshots": false,
+    "public_urls": false,
+    "sync_interval_seconds": 30
+  },
+  "head_turn": {
+    "enabled": true,
+    "ear_ratio_thr": 0.35,
+    "shoulder_ratio_thr": 0.2,
+    "smooth_frames": 5,
+    "consecutive_frames": 30,
+    "max_gap_frames": 3,
+    "cooldown_seconds": 30
+  },
+  "debug_overlay": false,
+  "cheating_classes": [
+    "cheating",
+    "suspected cheating"
+  ],
+  "behavior_labels": {
+    "cheating": "Cheating detected",
+    "suspected cheating": "Suspected cheating detected"
+  },
+  "class_kind": {},
+  "behavior_rules": {
+    "Suspected cheating detected": {
+      "consecutive_frames": 15
+    }
+  },
+  "agnostic_nms": true
+}
